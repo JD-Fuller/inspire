@@ -15,6 +15,8 @@ export default class TodoController {
     var form = e.target;
     var todo = {
       //TODO build the todo object from the data that comes into this method
+      id: e.id,
+      description: e.id
     };
     try {
       await TodoService.addTodoAsync(todo);

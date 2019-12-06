@@ -5,7 +5,6 @@ import store from "../store.js";
 function drawQuote() {
   let q = store.State.quote;
   document.getElementById("quote").innerHTML = q.Template;
-
   console.log("The Quote man says", store.State.quote);
 }
 

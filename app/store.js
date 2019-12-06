@@ -1,17 +1,23 @@
 import Weather from "./models/weather.js";
+import Quote from "./models/quote.js";
 
 let _state = {
   /**@type {Weather} */
   weather: new Weather({ name: "loading", main: { temp: 0.0 } }), //temporary fake data
   /**@type {any[]}*/
-  todos: [] //TODO change 'any' to your todo model
+  todos: [], //TODO change 'any' to your todo model
+  quote: [],
+  image: {}
 };
 
 /** Collection of listeners to be called based on keyed state changes
  * @type {{[x:string]: function[]}}
  */
 let _listeners = {
-  weather: []
+  weather: [],
+  quote: [],
+  todos: [],
+  image: []
 };
 
 /**

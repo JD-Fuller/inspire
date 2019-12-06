@@ -6,7 +6,9 @@ import store from "../store.js";
 //      (you may wish to set it as a background image)
 function drawImage() {
   let i = store.State.image;
-  document.getElementById("image").innerHTML = i.Template;
+  // document.getElementById("image").innerHTML = i.Template;
+
+  document.body.style.background = i.Template;
 
   console.log("The image man says", store.State.image);
 }
@@ -14,7 +16,7 @@ function drawImage() {
 export default class ImageController {
   constructor() {
     store.subscribe("image", drawImage);
-    ImageService.getImageAsync();
+    ImageService.getImage();
     console.log("Hello from the image controller");
   }
 }

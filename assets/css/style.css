@@ -1,4 +1,12 @@
-#todo-error{
+#todo-error {
   color: red;
   font-size: 2em;
+}
+
+.card-body {
+  text-align: center;
+  font-variant: small-caps;
+  color: whitesmoke;
+  background-color: rgb(51, 51, 51);
+  border: none;
 }

@@ -34,7 +34,36 @@
       A Todo List
       <div id="todo-error"></div>
       <form onsubmit=""></form>
-      <div id="todos"></div>
+      <div
+        class="col-3 mt-3 p-3 border rounded bg-light tasks"
+        style="margin: 1em;"
+      >
+        <h1 class="text-left border-bottom" id="name">
+          Todo List
+        </h1>
+        <div></div>
+        <ol id="todos">
+          <!-- INSERT TASKS HERE-->
+        </ol>
+        <form
+          style="margin-bottom: 1em;"
+          onsubmit="app.todoController.addTodoAsync(event,'${this.id}')"
+        >
+          <div class="input-group mb-3">
+            <input
+              id="todo"
+              type="text"
+              class="form-control"
+              placeholder="Add Todo"
+              aria-label="todo"
+              aria-describedby="todo-addon"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">+</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js"></script>

@@ -1,34 +1,59 @@
 import store from "../store.js";
 import Todo from "../models/todo.js";
-import todoService from "../services/todo-service.js";
+import TodoService from "../services/todo-service.js";
 
 //TODO Create the render function
 function _drawTodos() {
-  let todoTemplate = "";
+  let template = "";
   let list = store.State.todos;
+  console.log("This is my store stuff", list);
   debugger;
-  console.log("This is my store stuff", store.State.todos);
+  console.log("just before sending to template", template);
+  list.forEach(
+    item =>
+      (template += `
+      <dl>
+        <form>
+        <input style="margin-bottom: 1em;" type="checkbox" onsubmit="app.todoController.toggleTodoStatus(event,'${item._id}')">${item.description}</input><button onclick="app.todoController.removeTodoAsync('${item._id}')">x</button>
+        </form>
+      </dl>
+      `)
+  );
 
-  list.forEach(l => (todoTemplate += l.todoTemplate));
+  console.log("just after sending to template", template);
 
-  document.getElementById("todos").innerHTML = todoTemplate;
+  // document.getElementById("todos").innerHTML = list.todoTemplate;
+  document.getElementById("todos").innerHTML = template;
+
+  // let todoTemplate = "";
+  // let list = store.State.todos;
+
+  // list.forEach(list => (todoTemplate += list.todoTemplate));
+
+  // document.getElementById("todos").innerHTML = todoTemplate;
+
+  // let list = store.State.todos;
+  // debugger;
+
+  // document.getElementById("todos").innerHTML = list.todoTemplate
 }
 
 export default class TodoController {
   constructor() {
     //TODO Remember to register your subscribers
-    todoService.getTodos();
     store.subscribe("todos", _drawTodos);
+    TodoService.getTodos();
+    TodoService.removeTodoAsync();
   }
 
-  async addTodo(e) {
+  async addTodoAsync(e) {
     e.preventDefault();
     var form = e.target;
     var todo = {
-      //TODO build the todo object from the data that comes into this method
-      id: e.id,
-      description: e.description,
-      completed: e.completed
+      description: form.todo.value
+      // id: e.id,
+      // description: e.description,
+      // completed: e.completed
     };
     try {
       await TodoService.addTodoAsync(todo);
@@ -52,6 +77,8 @@ export default class TodoController {
   async removeTodo(todoId) {
     try {
       await TodoService.removeTodoAsync(todoId);
+      debugger;
+      console.log("remove from the list", todoId);
     } catch (error) {
       debugger;
       console.error("[ERROR]:", error);

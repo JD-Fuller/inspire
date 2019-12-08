@@ -3,7 +3,7 @@ import store from "../store.js";
 
 // @ts-ignore
 const todoApi = axios.create({
-  baseURL: "https://bcw-sandbox.herokuapp.com/api/jake/todos/",
+  baseURL: "https://bcw-sandbox.herokuapp.com/api/jdfuller/todos/",
   timeout: 8000
 });
 
@@ -12,7 +12,7 @@ class TodoService {
     console.log("Getting the Todo List");
     let res = await todoApi.get();
     debugger;
-    store.commit("todos", res.data);
+    store.commit("todos", res.data.data);
 
     console.log("this is from my getTodos", store.State.todos);
 
@@ -40,6 +40,12 @@ class TodoService {
     //TODO Work through this one on your own
     //		what is the request type
     //		once the response comes back, what do you need to insure happens?
+    let todo = store.State.todos.find(t => t.i_id == todoId);
+    debugger;
+    let res = await todoApi.delete(todo);
+    debugger;
+    store.commit("todos", res.data.data);
+    console.log("remove from the service", todo);
   }
 }
 

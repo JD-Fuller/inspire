@@ -4,33 +4,31 @@ import TodoService from "../services/todo-service.js";
 
 //TODO Create the render function
 function _drawTodos() {
+  // let template = "";
+  // let list = store.State.todos;
+  // console.log("This is my store stuff", list);
+  // debugger;
+  // console.log("just before sending to template", template);
+  // list.forEach(
+  //   item =>
+  //     (template += `
+  //     <dl>
+  //       <form>
+  //       <input style="margin-bottom: 1em;" type="checkbox" onsubmit="app.todoController.toggleTodoStatus(event,'${item._id}')">${item.description}</input><button onclick="app.todoController.removeTodoAsync('${item._id}')">x</button>
+  //       </form>
+  //     </dl>
+  //     `)
+  // );
+  // console.log("just after sending to template", template);
+  // document.getElementById("todos").innerHTML = template;
+
   let template = "";
   let list = store.State.todos;
-  console.log("This is my store stuff", list);
   debugger;
-  console.log("just before sending to template", template);
-  list.forEach(
-    item =>
-      (template += `
-      <dl>
-        <form>
-        <input style="margin-bottom: 1em;" type="checkbox" onsubmit="app.todoController.toggleTodoStatus(event,'${item._id}')">${item.description}</input><button onclick="app.todoController.removeTodoAsync('${item._id}')">x</button>
-        </form>
-      </dl>
-      `)
-  );
+  // list.forEach((item, i) => (template += item.Template(i)));
+  list.forEach(item => new Todo((template += item.Template)));
 
-  console.log("just after sending to template", template);
-
-  // document.getElementById("todos").innerHTML = list.todoTemplate;
   document.getElementById("todos").innerHTML = template;
-
-  // let todoTemplate = "";
-  // let list = store.State.todos;
-
-  // list.forEach(list => (todoTemplate += list.todoTemplate));
-
-  // document.getElementById("todos").innerHTML = todoTemplate;
 
   // let list = store.State.todos;
   // debugger;
@@ -44,6 +42,7 @@ export default class TodoController {
     store.subscribe("todos", _drawTodos);
     TodoService.getTodos();
     TodoService.removeTodoAsync();
+    TodoService.toggleTodoStatus();
   }
 
   async addTodoAsync(e) {
@@ -66,7 +65,7 @@ export default class TodoController {
   //NOTE This method will pass an Id to your service for the TODO that will need to be toggled
   async toggleTodoStatus(todoId) {
     try {
-      await TodoService.toggleTodoStatusAsync(todoId);
+      await TodoService.toggleTodoStatus(todoId);
     } catch (error) {
       debugger;
       console.error("[ERROR]:", error);

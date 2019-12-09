@@ -1,24 +1,27 @@
 export default class Todo {
   constructor(data) {
     console.log("[RAW To-Do API DATA]", data);
+    debugger;
+    this.completed = data.completed;
     this.description = data.description;
+    console.log("this is my data.description", data.description);
     // this.user = data.user;
     this._id = data._id;
-    // this.completed = data.completed;
-    // this.__v = data.__v;
+    console.log("this is my data._id", data._id);
   }
 
   get Template() {
-    return `
+    let template = `
         <div class="card">
             <div class="card-body">
-            <form
-          style="margin-bottom: 1em;"
-          onsubmit="app.todoController.toggleTodoStatus(event,'${this._id}')">
-              <h5 class="card-title">${this.description}</h5>
-              <h6 class="card-subtitle">${this._id}</h6>
-          </div>
-        </div>
-    `;
+            <input style="margin-bottom: 1em;" type="checkbox" onclick="app.todoController.toggleTodoStatusAsync('${this._id}')">
+            `;
+    if (this.completed) {
+      template += `<del><em>${this.description}</em></del></input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
+    } else {
+      template += `${this.description}</input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
+    }
+    template += `</div>`;
+    return template;
   }
 }

@@ -12,12 +12,14 @@ class TodoService {
     console.log("Getting the Todo List");
     let res = await todoApi.get();
     debugger;
-    store.commit("todos", res.data.data);
-
+    let results = res.data.data.map(todoData => new Todo(todoData));
+    // store.commit("todos", new Todo(res.data));
+    store.commit("todos", results);
+    console.log("here is the new todos with results", results);
     console.log("this is from my getTodos", store.State.todos);
-
-    //TODO Handle this response from the server
   }
+
+  //TODO Handle this response from the server
 
   async addTodoAsync(todo) {
     let res = await todoApi.post("", todo);
@@ -26,13 +28,26 @@ class TodoService {
     //TODO Handle this response from the server (hint: what data comes back, do you want this?)
   }
 
-  async toggleTodoStatusAsync(todoId) {
-    let todo = store.State.todos.find(todo => todo._id == todoId);
+  toggleTodoStatus(todoId) {
+    debugger;
+
+    let todo = store.State.todos.find(t => t._id == todoId);
+
+    if (todo.completed == false) {
+      todoApi.put(todoId, { completed: true }).then(res => {
+        console.log("completed task", res);
+      });
+    } else {
+      todoApi.put(todoId, { completed: false }).then(res => {
+        console.log("incomplete task", res);
+      });
+      this.getTodos();
+    }
+
     //TODO Make sure that you found a todo,
     //		and if you did find one
     //		change its completed status to whatever it is not (ex: false => true or true => false)
 
-    let res = await todoApi.put(todoId, todo);
     //TODO do you care about this data? or should you go get something else?
   }
 
@@ -42,6 +57,7 @@ class TodoService {
     //		once the response comes back, what do you need to insure happens?
     let todo = store.State.todos.find(t => t.i_id == todoId);
     debugger;
+
     let res = await todoApi.delete(todo);
     debugger;
     store.commit("todos", res.data.data);

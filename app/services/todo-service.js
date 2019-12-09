@@ -26,7 +26,7 @@ class TodoService {
     this.getTodos();
   }
 
-  async toggleTodoStatus(todoId) {
+  async toggleTodoStatusAsync(todoId) {
     let todo = store.State.todos;
     let newItem = todo.find(item => item._id == todoId);
     console.log("here is the todo from the search", newItem);

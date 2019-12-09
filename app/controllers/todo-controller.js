@@ -40,7 +40,7 @@ export default class TodoController {
     //TODO Remember to register your subscribers
     store.subscribe("todos", _drawTodos);
     TodoService.removeTodoAsync();
-    TodoService.toggleTodoStatus();
+    TodoService.toggleTodoStatusAsync();
     TodoService.getTodos();
     TodoService.addTodoAsync();
   }
@@ -62,7 +62,7 @@ export default class TodoController {
   //NOTE This method will pass an Id to your service for the TODO that will need to be toggled
   async toggleTodoStatusAsync(todoId) {
     try {
-      await TodoService.toggleTodoStatus(todoId);
+      await TodoService.toggleTodoStatusAsync(todoId);
     } catch (error) {
       debugger;
       console.error("[ERROR]:", error);

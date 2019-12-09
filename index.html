@@ -17,34 +17,38 @@
 
   <body style="height: 100vh;">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col">
-          <div id="weather">
+      <div class="row" style="flex-direction: column;">
+        <div class="col-12"></div>
+        <div id="quote">
+          <!--QUOTE TEMPLATE -->
+        </div>
+        <div class="col-12 center-item" style="text-align: -webkit-center;">
+          <div id="weather" style="margin: 1rem;">
             <!-- WEATHER TEMPLATE -->
-          </div>
-
-          <div id="quote">
-            <!--QUOTE TEMPLATE -->
           </div>
         </div>
       </div>
     </div>
-
     <div>
-      A Todo List
       <div id="todo-error"></div>
       <form onsubmit=""></form>
       <div
-        class="col-3 mt-3 p-3 border rounded bg-light tasks"
-        style="margin: 1em;"
+        class="col-3 mt-3 p-3 rounded bg-dark tasks"
+        style="margin: 1em; border: none;"
       >
-        <h1 class="text-left border-bottom" id="name">
-          Todo List
+        <h1
+          class="text-left border-bottom"
+          style="color: rgb(221, 220, 220)"
+          id="name"
+        >
+          Get Things Done List
         </h1>
-        <div></div>
-        <ol id="todos">
-          <!-- INSERT TASKS HERE-->
-        </ol>
+        <h3 id="task-sum"></h3>
+        <div>
+          <ol id="todos">
+            <!-- INSERT TASKS HERE-->
+          </ol>
+        </div>
         <form
           style="margin-bottom: 1em;"
           onsubmit="app.todoController.addTodoAsync(event,'${this.id}')"

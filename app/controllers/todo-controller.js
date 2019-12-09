@@ -34,6 +34,16 @@ function _drawTodos() {
 
   // document.getElementById("todos").innerHTML = list.todoTemplate
 }
+function _countTasks() {
+  let sum = store.State.tasks;
+  let list = store.State.todos.length + 1;
+  sum = list.toString();
+  store.commit("tasks", sum);
+
+  let tSum = `${this.sum}`;
+
+  document.getElementById("task-sum").innerHTML = tSum;
+}
 
 export default class TodoController {
   constructor() {
@@ -43,6 +53,7 @@ export default class TodoController {
     TodoService.toggleTodoStatusAsync();
     TodoService.getTodos();
     TodoService.addTodoAsync();
+    _countTasks();
   }
 
   async addTodoAsync(e) {

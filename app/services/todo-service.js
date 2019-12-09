@@ -30,7 +30,6 @@ class TodoService {
     let todo = store.State.todos;
     let newItem = todo.find(item => item._id == todoId);
     console.log("here is the todo from the search", newItem);
-    console.log("newItem.completed printout", newItem.completed);
     if (newItem.completed == false) {
       let res = await todoApi.put(todoId, { completed: true });
       // store.commit("todos", res.data.data);

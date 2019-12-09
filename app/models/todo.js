@@ -12,13 +12,13 @@ export default class Todo {
   get Template() {
     let template = `
         <div class="card">
-            <div class="card-body">
-            <input style="margin-bottom: 1em;" type="checkbox" onclick="app.todoController.toggleTodoStatusAsync('${this._id}')">
+            <div class="card-body items">
+            <input style="margin-bottom: 1em;" type="checkbox" onclick="app.todoController.toggleTodoStatusAsync('${this._id}')"> 
             `;
     if (this.completed) {
-      template += `<del><em>${this.description}</em></del></input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
+      template += `<del><em>${this.description}</em></del>  </input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
     } else {
-      template += `${this.description}</input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
+      template += `${this.description}  </input><button onclick="app.todoController.removeTodoAsync('${this._id}')">x</button>`;
     }
     template += `</div>`;
     return template;

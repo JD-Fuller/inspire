@@ -1,7 +1,6 @@
 export default class Todo {
   constructor(data) {
     console.log("[RAW To-Do API DATA]", data);
-    debugger;
     this.completed = data.completed;
     this.description = data.description;
     console.log("this is my data.description", data.description);

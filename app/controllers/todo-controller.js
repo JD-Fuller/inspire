@@ -24,7 +24,6 @@ function _drawTodos() {
 
   let template = "";
   let list = store.State.todos;
-  debugger;
   // list.forEach((item, i) => (template += item.Template(i)));
   list.forEach(item => new Todo((template += item.Template)));
 
@@ -40,9 +39,10 @@ export default class TodoController {
   constructor() {
     //TODO Remember to register your subscribers
     store.subscribe("todos", _drawTodos);
-    TodoService.getTodos();
     TodoService.removeTodoAsync();
     TodoService.toggleTodoStatus();
+    TodoService.getTodos();
+    TodoService.addTodoAsync();
   }
 
   async addTodoAsync(e) {
@@ -50,9 +50,6 @@ export default class TodoController {
     var form = e.target;
     var todo = {
       description: form.todo.value
-      // id: e.id,
-      // description: e.description,
-      // completed: e.completed
     };
     try {
       await TodoService.addTodoAsync(todo);
@@ -63,7 +60,7 @@ export default class TodoController {
   }
 
   //NOTE This method will pass an Id to your service for the TODO that will need to be toggled
-  async toggleTodoStatus(todoId) {
+  async toggleTodoStatusAsync(todoId) {
     try {
       await TodoService.toggleTodoStatus(todoId);
     } catch (error) {
@@ -73,14 +70,14 @@ export default class TodoController {
   }
 
   //NOTE This method will pass an Id to your service for the TODO that will need to be deleted
-  async removeTodo(todoId) {
+  async removeTodoAsync(todoId) {
     try {
       await TodoService.removeTodoAsync(todoId);
-      debugger;
       console.log("remove from the list", todoId);
     } catch (error) {
       debugger;
       console.error("[ERROR]:", error);
     }
+    _drawTodos();
   }
 }

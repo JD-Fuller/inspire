@@ -40,7 +40,7 @@ function _countTasks() {
   sum = list.toString();
   store.commit("tasks", sum);
 
-  let tSum = `${this.sum}`;
+  let tSum = `<h3>${this.sum}</h3>`;
 
   document.getElementById("task-sum").innerHTML = tSum;
 }
@@ -49,11 +49,11 @@ export default class TodoController {
   constructor() {
     //TODO Remember to register your subscribers
     store.subscribe("todos", _drawTodos);
+    // store.subscribe("tasks", _countTasks);
     TodoService.removeTodoAsync();
     TodoService.toggleTodoStatusAsync();
     TodoService.getTodos();
     TodoService.addTodoAsync();
-    _countTasks();
   }
 
   async addTodoAsync(e) {

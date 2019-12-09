@@ -8,7 +8,8 @@ let _state = {
   weather: new Weather({ name: "loading", main: { temp: 0.0 } }), //temporary fake data
   todos: [],
   quote: [],
-  image: []
+  image: [],
+  tasks: ""
 };
 
 /** Collection of listeners to be called based on keyed state changes

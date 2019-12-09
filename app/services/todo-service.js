@@ -57,11 +57,15 @@ class TodoService {
     //TODO Work through this one on your own
     //		what is the request type
     //		once the response comes back, what do you need to insure happens?
+
     let todo = store.State.todos;
     let removeItem = todo.find(item => item._id == todoId);
     console.log("remove from the service", removeItem);
-    let res = await todoApi.delete(removeItem);
-    store.commit("todos", res.data.data);
+    debugger;
+    let res = await todoApi.delete(todoId);
+    this.getTodos();
+    // store.commit("todos", {});
+    // store.commit("todos", res.data.data);
   }
 }
 

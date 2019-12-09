@@ -22,7 +22,7 @@ function _drawTodos() {
   // console.log("just after sending to template", template);
   // document.getElementById("todos").innerHTML = template;
 
-  let template = "";
+  let template = `<h3 style="color: white;"> Total: ${store.State.todos.length}</h3>`;
   let list = store.State.todos;
   // list.forEach((item, i) => (template += item.Template(i)));
   list.forEach(item => new Todo((template += item.Template)));
@@ -40,9 +40,9 @@ function _countTasks() {
   sum = list.toString();
   store.commit("tasks", sum);
 
-  let tSum = `<h3>${this.sum}</h3>`;
+  let tSum = `<h3>${store.State.todos.length}</h3>`;
 
-  document.getElementById("task-sum").innerHTML = tSum;
+  document.getElementById("taskSum").innerHTML = tSum;
 }
 
 export default class TodoController {
